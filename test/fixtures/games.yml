@@ -1,0 +1,21 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  release_date: MyString
+  description: MyText
+  genre: MyString
+  price: 9.99
+  cover_art: MyString
+  developer: MyString
+  platform: one
+
+two:
+  name: MyString
+  release_date: MyString
+  description: MyText
+  genre: MyString
+  price: 9.99
+  cover_art: MyString
+  developer: MyString
+  platform: two
