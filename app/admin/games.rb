@@ -1,18 +1,15 @@
 ActiveAdmin.register Game do
 
-  # See permitted parameters documentation:
-  # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
-  #
-  # Uncomment all parameters which should be permitted for assignment
-  #
-  # permit_params :name, :release_date, :description, :genre, :price, :cover_art, :developer, :platform_id
-  #
-  # or
-  #
-  # permit_params do
-  #   permitted = [:name, :release_date, :description, :genre, :price, :cover_art, :developer, :platform_id]
-  #   permitted << :other if params[:action] == 'create' && current_user.admin?
-  #   permitted
-  # end
-  
+  permit_params :name, :release_date, :description, :genre, :price, :cover_art, :developer, :platform_id, :image
+
+  form do |f|
+    f.semantic_errors # shows errors on :base
+    f.inputs
+    f.inputs do
+      f.input :release_date, as: :date_picker
+      f.input :cover_art, as: :file, hint: f.object.cover_art.present? ? image_tag(f.object.image.variant(resize_to_limit: [600, 600])) : ""
+    end
+    f.actions         # adds the 'Submit' and 'Cancel' buttons
+  end
+
 end

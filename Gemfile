@@ -57,3 +57,4 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 ########################################
 gem 'activeadmin', '~> 2.8', '>= 2.8.1' # Admin Dashboard as a Rails Engine.
 gem 'devise'
+gem 'image_processing'
