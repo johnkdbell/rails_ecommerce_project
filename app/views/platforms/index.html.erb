@@ -2,22 +2,14 @@
 
 </br>
 
+
+
 <h1>Platforms</h1>
 <div class="container">
 
   </br>
-  <div class="row">
-    <div class="col">
-      <h5>Name</h5>
-    </div>
+  <div class="columns">
+    <%= render partial: 'platform', object: @platform, locals: { show_link: false } %>
   </div>
-  <% @platforms.each do |platform| %>
-
-  <div class="col">
-    <%= link_to platform.name, platform, class: "list-group-item list-group-item-action"  %>
-  </div>
-
-  </br>
-  <% end %>
 
 </div>

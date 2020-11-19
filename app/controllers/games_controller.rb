@@ -1,6 +1,6 @@
 class GamesController < ApplicationController
   def index
-    @games = Game.includes(:platform).order("name ASC")
+    @games = Game.includes(:platform).order("name ASC").page(params[:page])
   end
 
   def show
