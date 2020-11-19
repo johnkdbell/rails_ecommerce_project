@@ -61,3 +61,8 @@ gem 'image_processing'
 
 gem 'rubocop'
 gem 'rubocop-rails'
+
+gem 'faker', :git => 'https://github.com/faker-ruby/faker.git', :branch => 'master'
+
+gem 'kaminari'
+gem 'bootstrap4-kaminari-views'
