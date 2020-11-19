@@ -1,2 +1,40 @@
-<h1>Games#index</h1>
-<p>Find me in app/views/games/index.html.erb</p>
+<% content_for(:html_title) { "Games" } %>
+
+</br>
+
+<h1>Games</h1>
+<div class="row">
+  <% @games.each do |game| %>
+    <div class="py-5">
+      <div class="container">
+        <div class="col-md-4">
+          <div class="card bg-light mb-3" style="width: 18rem; box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 3px 10px 0 rgba(0, 0, 0, 0.1);">
+            <div class="card-header bg-dark" style="text-align: right;"><a href="#" style="text-decoration: none;">➕</a></div>
+            <% if game.image.present? %>
+              <div class="card-img-top" style="display:flex;justify-content:center;align-items:center;overflow:hidden;height:150px;">
+                <%= image_tag(game.image.variant(resize_to_limit: [600, 600]), {:style => "flex-shrink:0;min-width:100%;"}) %>
+              </div>
+            <% else %>
+              <div class="card-img-top" style="display:flex;justify-content:center;align-items:center;overflow:hidden;height:150px;border-radius: 0px 0px 100% 100%;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+                <%= image_tag(game.cover_art, {:style => "flex-shrink:0;min-width:100%;"}) %>
+              </div>
+            <% end %>
+            <div class="card-body">
+              <h5 class="card-title"><%= link_to game.name, game %></h5>
+              <p>Platform: <%= link_to game.platform.name, game.platform %></p>
+              <p class="card-text font-weight-light"><%= game.description.truncate(200, :separator => /\w/) %></p>
+              <ul class="list-unstyled d-flex justify-content-between font-small text-muted mb-4">
+                <li>Price: <br>$<%= game.price %>0</li>
+                <li>Release Date: <br><%= game.release_date %></li>
+              </ul>
+              <ul class="list-unstyled d-flex justify-content-between font-small text-muted mb-4">
+                <li>Genre: <br><%= game.genre %></li>
+              </ul>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
