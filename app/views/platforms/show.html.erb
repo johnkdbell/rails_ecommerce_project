@@ -1,2 +1,24 @@
-<h1>Platforms#show</h1>
-<p>Find me in app/views/platforms/show.html.erb</p>
+</br>
+
+<% content_for(:html_title) { @platform.name } %>
+
+<div class="text-decoration-none">
+  <a href='#' style="text-decoration:none;" onclick='history.go(-1);return false;'>Return</a>
+</div>
+
+</br>
+
+<div class="container">
+  <h1><%= @platform.name %></h1>
+
+  <p>This platform has <%= pluralize @platform.games.count, "game" %> available.</p>
+  <div class="container">
+    <h4>Games</h4>
+    <ul>
+      <% @platform.games.each do |game| %>
+        <li><%= link_to game.name, game %></li>
+      <% end %>
+    </ul>
+  </div>
+</div>
+

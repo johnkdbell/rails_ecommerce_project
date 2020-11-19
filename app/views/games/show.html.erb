@@ -1,5 +1,39 @@
-<div class="columns">
-  <%= render partial: 'game',
-             object: @game,
-             locals: { show_link: false } %>
+</br>
+
+<% content_for(:html_title) { @game.name } %>
+
+<div class="text-decoration-none">
+  <a href='#' style="text-decoration:none;" onclick='history.go(-1);return false;'>Return</a>
 </div>
+
+</br>
+
+<div class="container">
+  <h1><%= @game.name %></h1>
+
+  <div class="container">
+
+    <p>
+      <strong>Genres: </strong>
+      <%= @game.genre %>
+    </p>
+    <p>
+      <strong>Platform: </strong>
+      <%= link_to @game.platform.name, @game.platform %>
+    </p>
+
+    <p>
+      <strong>Developer: </strong>
+      <%= @game.developer %>
+    </p>
+
+    <p>
+      <div>
+        <h5 style="font-weight: bold;">Description:</h5>
+        <%= @game.description %>
+      </div>
+    </p>
+
+  </div>
+</div>
+

@@ -1,2 +1,23 @@
-<h1>Platforms#index</h1>
-<p>Find me in app/views/platforms/index.html.erb</p>
+<% content_for(:html_title) { "Platforms" } %>
+
+</br>
+
+<h1>Platforms</h1>
+<div class="container">
+
+  </br>
+  <div class="row">
+    <div class="col">
+      <h5>Name</h5>
+    </div>
+  </div>
+  <% @platforms.each do |platform| %>
+
+  <div class="col">
+    <%= link_to platform.name, platform, class: "list-group-item list-group-item-action"  %>
+  </div>
+
+  </br>
+  <% end %>
+
+</div>

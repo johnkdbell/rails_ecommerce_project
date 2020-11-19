@@ -13,3 +13,37 @@
  *= require_tree .
  *= require_self
  */
+
+details > summary:first-of-type
+{
+  width: 110%;
+  margin-left: -5%;
+  background-color: rgb(242, 242, 242);
+  border-radius: 25px;
+  padding-left: 12px;
+}
+details > summary:first-of-type:hover
+{
+  background-color: rgb(245, 245, 245);
+  border-radius: 25px;
+}
+summary::-webkit-details-marker
+{
+  display:none;
+  color: #00ACF3;
+  font-size: 125%;
+  margin-right: 2px;
+}
+details > summary:focus
+{
+  outline-style: none;
+}
+details > summary:hover
+{
+  color: #00ACF3;
+}
+article > details > summary
+{
+  font-size: 28px;
+  margin-top: 16px;
+}
