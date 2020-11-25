@@ -5,11 +5,11 @@
         <div class="col-md-4">
           <div class="card bg-light mb-3" style="width: 18rem; box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 3px 10px 0 rgba(0, 0, 0, 0.1);">
             <% if game.image.present? %>
-              <div class="card-img-top" style="display:flex;justify-content:center;align-items:center;overflow:hidden;height:150px;border-radius: 0px 0px 100% 100%;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+              <div class="card-img-top" style="display:flex;justify-content:center;align-items:center;overflow:hidden;height:150px;/*! border-radius: 10px 10px 100% 100%; */box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
                 <%= image_tag(game.image.variant(resize_to_limit: [600, 600]), {:style => "flex-shrink:0;min-width:100%;"}) %>
               </div>
             <% else %>
-              <div class="card-img-top" style="display:flex;justify-content:center;align-items:center;overflow:hidden;height:150px;border-radius: 0px 0px 100% 100%;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+              <div class="card-img-top" style="display:flex;justify-content:center;align-items:center;overflow:hidden;height:150px;/*! border-radius: 10px 0px 100% 100%; */box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
                 <%= image_tag(game.cover_art, {:style => "flex-shrink:0;min-width:100%;"}) %>
               </div>
             <% end %>
@@ -25,7 +25,7 @@
               </br>
 
               <ul class="list-unstyled d-flex justify-content-between font-small text-muted mb-4">
-                <li>Price: <br>$<%= game.price %>0</li>
+                <li>Price: <br><%= number_to_currency(game.price) %></li>
                 <li>Release Date: <br><%= game.release_date %></li>
               </ul>
               <ul class="list-unstyled d-flex justify-content-between font-small text-muted mb-4">
@@ -33,7 +33,16 @@
               </ul>
             </div>
             <div class="card-footer text-muted" style="text-align:right;">
-              <a href="#" style="text-decoration: none;">➕</a>
+              <% if cart.include?(game) %>
+                <%= button_to cart_path(game), method: :delete do %>
+                  ❌ Remove from cart
+                <% end %>
+              <% else %>
+                <%= form_with url: cart_index_path, method: :post do %>
+                  <%= hidden_field_tag(:id, game.id) %>
+                    <%= button_tag '➕ Add to Cart' %>
+                <% end %>
+              <% end %>
             </div>
           </div>
         </div>

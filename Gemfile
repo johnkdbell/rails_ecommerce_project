@@ -66,3 +66,5 @@ gem 'faker', :git => 'https://github.com/faker-ruby/faker.git', :branch => 'mast
 
 gem 'kaminari'
 gem 'bootstrap4-kaminari-views'
+
+gem 'material_icons'

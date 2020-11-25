@@ -1,0 +1,5 @@
+<% cart.each do |game| %>
+                <div href="#">
+                  <%= game.name %><%= link_to "❌", cart_path(game), method: :delete %>
+                </div>
+              <% end %>

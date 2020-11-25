@@ -34,6 +34,11 @@ summary::-webkit-details-marker
   font-size: 125%;
   margin-right: 2px;
 }
+/*
+*= require material_icons
+*/
+
+
 details > summary:focus
 {
   outline-style: none;
