@@ -56,7 +56,10 @@ article > details > summary
 .hide {
   visibility: hidden;
   opacity: 0;
-  transition: visibility 0s, opacity 0.5s linear;
+   -webkit-transition: linear 0.5s;
+   -moz-transition: linear 0.5s;
+  transition: linear 0.5s;
+
 }
 
 div:hover > .hide {
