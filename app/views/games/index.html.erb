@@ -7,9 +7,10 @@
 </div>
 
 <div class="columns">
-  <%= render partial: 'game', object: @game, locals: { show_link: false } %>
+  <%= render partial: 'game', object: @games, locals: { show_link: false } %>
 </div>
 
 <div class="container pagination justify-content-center">
   <%= paginate @games, theme: 'twitter-bootstrap-4', pagination_class: "pagination-md" %>
 </div>
+

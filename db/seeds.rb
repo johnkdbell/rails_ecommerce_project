@@ -22,7 +22,9 @@ games.each do |g|
       genre:        g["genre"],
       price:        g["price"],
       developer:    g["developer"],
-      cover_art:    g["cover_art"]
+      cover_art:    g["cover_art"],
+      on_sale:      g["on_sale"],
+      sale_price:   g["sale_price"]
     )
   end
   next
@@ -31,4 +33,3 @@ end
 puts "Created #{Platform.count} developers"
 puts "Created #{Game.count} games"
 
-# AdminUser.create!(email: '', password: '', password_confirmation: '') if Rails.env.development?

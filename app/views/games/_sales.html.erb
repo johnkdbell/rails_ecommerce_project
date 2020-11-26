@@ -1,0 +1,56 @@
+<div class="card-group justify-content-center">
+  <% @games_sale.each do |game| %>
+    <div class="row">
+      <div class="py-3 px-4">
+        <div class="card bg-light" style="width:15rem;box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 3px 10px 0 rgba(0, 0, 0, 0.1);">
+          <% if game.image.present? %>
+            <div class="card-img-top" style="display:flex;justify-content:center;align-items:center;overflow:hidden;height:100px;/*! border-radius: 10px 10px 100% 100%; */box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+              <%= image_tag(game.image.variant(resize_to_limit: [600, 600]), {:style => "flex-shrink:0;min-width:100%;"}) %>
+            </div>
+          <% else %>
+            <div class="card-img-top" style="display:flex;justify-content:center;align-items:center;overflow:hidden;height:100px;/*! border-radius: 10px 0px 100% 100%; */box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+              <%= image_tag(game.cover_art, {:style => "flex-shrink:0;min-width:100%;"}) %>
+            </div>
+          <% end %>
+          <div class="card-body" style="padding-bottom:0px">
+            <h5 class="card-title" style="font-size:18px;"><%= link_to game.name, game %></h5>
+            <p style="font-size:12px;">Platform: <%= link_to game.platform.name, game.platform %></p>
+
+            <details>
+              <summary style="font-size:12px;">Description:</summary>
+                <p class="card-text font-weight-light" style="font-size:12px;">
+                  <%= game.description.truncate(200, :separator => /\w/) %>
+                </p>
+                <div style="border-bottom: 1px solid rgb(220, 220, 220);"></div>
+            </details>
+            </br>
+
+            <ul class="list-unstyled d-flex justify-content-between font-small text-muted mb-4">
+              <li style="font-size:12px;">Price: <br><%= number_to_currency(game.price) %></li>
+              <li style="font-size:12px;">Release Date: <br><%= game.release_date %></li>
+            </ul>
+            <ul class="list-unstyled d-flex justify-content-between font-small text-muted mb-4">
+              <li style="font-size:12px;">Genre: <br><%= game.genre %></li>
+            </ul>
+          </div>
+          <div class="card-footer text-muted hide" style="text-align:right;height:30px;padding-top:6px;">
+            <% if cart.include?(game) %>
+              <%= link_to cart_path(game), method: :delete, :style=>'text-decoration:none;' do %>
+                <p style="font-size:12px;">Remove from Cart ❌</p>
+              <% end %>
+            <% else %>
+              <%= form_with url: cart_index_path, method: :post do %>
+                <%= hidden_field_tag(:id, game.id) %>
+                  <p style="font-size:12px;">
+                    <button style="background: none;border: none;padding: 0;font: inherit;cursor: pointer;outline: inherit;">
+                      Add to Cart ➕
+                    </button>
+                  </p>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

@@ -39,7 +39,6 @@
           </li>
         </ul>
 
-
         <%= link_to cart_index_path do %>
         <span>
           <%= content_tag(:i, "shopping_cart", class: "material-icons", style: "color: white; font-size: 36px") %>
@@ -56,8 +55,7 @@
       <div class="container">
         </br>
         <%= render 'shared/breadcrumbs' %>
-      <%= yield %>
-
+        <%= yield %>
       </div>
     </section>
 

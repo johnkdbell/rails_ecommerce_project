@@ -1,6 +1,6 @@
 ActiveAdmin.register Game do
 
-  permit_params :name, :release_date, :description, :genre, :price, :cover_art, :developer, :platform_id, :image
+  permit_params :name, :release_date, :description, :genre, :price, :cover_art, :developer, :platform_id, :sale_price, :on_sale, :image
 
   form do |f|
     f.semantic_errors # shows errors on :base

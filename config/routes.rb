@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   resources :games, only: %i[index show] do
     collection do
       get "search"
+      get "sales"
+      get "new"
     end
   end
 

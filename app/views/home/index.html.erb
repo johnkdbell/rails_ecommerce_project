@@ -5,10 +5,19 @@
 <body>
 
   <div class="column">
-    <h2 class="title is-2">Lowest Price</h2>
-    <%= render partial: 'games/game', object: @game, locals: { show_link: false } %>
+    <h2 class="title is-2"><a href="games/new">New Arrivals</a></h2>
+      <%= render partial: 'games/new', object: @games_new, locals: { show_link: false } %>
   </div>
-</div>
+
+  <div class="column">
+    <h2 class="title is-2"><a href="games/sales">On Sale</a></h2>
+      <%= render partial: 'games/sales', object: @games_sale, locals: { show_link: false } %>
+  </div>
+
+  <div class="column">
+    <h2 class="title is-2">Lowest Price</h2>
+      <%= render partial: 'games/game', object: @game, locals: { show_link: false } %>
+  </div>
 
 </body>
 

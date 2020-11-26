@@ -1,0 +1,16 @@
+<% content_for(:html_title) { "New Arrivials" } %>
+
+</br>
+
+<div class="container">
+  <h1>New Arrivals</h1>
+</div>
+
+<div class="columns">
+  <%= render partial: 'new', object: @games_new, locals: { show_link: false } %>
+</div>
+
+<div class="container pagination justify-content-center">
+  <%= paginate @games_new, theme: 'twitter-bootstrap-4', pagination_class: "pagination-md" %>
+</div>
+
