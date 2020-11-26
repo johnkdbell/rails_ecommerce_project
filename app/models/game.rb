@@ -3,7 +3,7 @@ class Game < ApplicationRecord
 
   belongs_to :platform
 
-  paginates_per 9
+  paginates_per 8
 
   validates :name, presence: true, uniqueness: true
   validates :release_date, :genre, :developer, presence: true

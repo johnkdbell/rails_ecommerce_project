@@ -1,5 +1,6 @@
 class CartController < ApplicationController
   def index
+
   end
 
   # POST /cart
@@ -11,17 +12,18 @@ class CartController < ApplicationController
     unless session[:shopping_cart].include?(id)
       session[:shopping_cart] << id
       game = Game.find(id)
+      redirect_to request.referer
     end
   end
 
   # DELETE /cart/:id
-def destroy
-  # Remove params[:id] from the cart.
-  id = params[:id].to_i
-  session[:shopping_cart].delete(id)
-
-  game = Game.find(id)
-end
+  def destroy
+    # Remove params[:id] from the cart.
+    id = params[:id].to_i
+    session[:shopping_cart].delete(id)
+    game = Game.find(id)
+    redirect_to request.referer
+  end
 
 
 end
