@@ -1,8 +1,10 @@
 require "csv"
 
+OrderedGame.delete_all
+Order.delete_all
 Game.delete_all
 Platform.delete_all
-AdminUser.delete_all
+# AdminUser.delete_all
 
 filename = Rails.root.join("db/vg.csv")
 
@@ -30,6 +32,32 @@ games.each do |g|
   next
 end
 
+i = 0
+
+10.times do
+
+  game = Game.all.sample(2)
+
+  order = Order.create(total_price: 0)
+
+  game.each do |g|
+    if order&.valid?
+      order.ordered_games.create(
+        game_id: g.id,
+        purchase_price: g.price,
+        quantity: 2
+      )
+    end
+  end
+
+  #order.update(total_price: game["price"])
+
+end
+
 puts "Created #{Platform.count} developers"
 puts "Created #{Game.count} games"
+puts "Created #{Order.count} orders"
+puts "Created #{OrderedGame.count} ordered games"
+
+
 

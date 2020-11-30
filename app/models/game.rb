@@ -4,6 +4,7 @@ class Game < ApplicationRecord
   belongs_to :platform
   has_many :ordered_games
   has_many :orders, through: :ordered_games
+  accepts_nested_attributes_for :ordered_games, allow_destroy: true
 
   paginates_per 8
 
