@@ -2,6 +2,8 @@ class Game < ApplicationRecord
   has_one_attached :image
 
   belongs_to :platform
+  has_many :ordered_games
+  has_many :orders, through: :ordered_games
 
   paginates_per 8
 

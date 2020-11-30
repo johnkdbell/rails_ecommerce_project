@@ -17,14 +17,12 @@ class ApplicationController < ActionController::Base
   private
 
   def initialize_session
-    # This will initalize our shopping cart
-    session[:shopping_cart] ||= [] # The shopping cart will be an array of product ids
+    session[:shopping_cart] ||= {}
   end
 
   def cart
     # Return a collection of Product object based on the product ids in the shopping cart
     Game.find(session[:shopping_cart])
   end
-
 
 end
