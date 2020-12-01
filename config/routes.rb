@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  get 'page/index'
-  get 'page/show'
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
 
@@ -19,6 +17,10 @@ Rails.application.routes.draw do
   end
 
   resources :cart, only: %i[index create destroy]
+
+  resources :page, except: [:show]
+
+  get ":permalink" => "page#permalink"
 
   root to: "home#index"
 

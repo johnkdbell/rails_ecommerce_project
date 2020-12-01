@@ -1,11 +1,13 @@
 class PageController < ApplicationController
-  before_action :set_page, only: [:show]
 
   def index
     @pages = Page.all
   end
 
-  def show
+  def permalink
+    @page = Page.find_by(permalink: params[:permalink])
+    add_breadcrumbs("Games", games_path)
+    add_breadcrumbs(@game.name)
   end
 
   def new
