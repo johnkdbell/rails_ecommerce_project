@@ -2,11 +2,11 @@ Rails.application.routes.draw do
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
 
-  resources :games, only: %i[index show] do
+  resources :games, only: %i[index show new_arrivals sales] do
     collection do
       get "search"
+      get "new-arrivals"
       get "sales"
-      get "new"
     end
   end
 

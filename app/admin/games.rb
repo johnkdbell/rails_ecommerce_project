@@ -3,6 +3,23 @@ ActiveAdmin.register Game do
   permit_params :name, :release_date, :description, :genre, :price, :cover_art, :developer,
                 :platform_id, :sale_price, :on_sale, :image, ordered_games: [:id, :game_id, :order_id, :_destroy]
 
+
+  index do
+    selectable_column
+    column :id
+    column :name
+    column :release_date
+    column :genre
+    column :price
+    column :on_sale
+    column :sale_price
+    column :developer
+    column :platform_id
+    column :created_at
+    column :updated_at
+    actions
+  end
+
   form do |f|
     f.semantic_errors # shows errors on :base
     f.inputs

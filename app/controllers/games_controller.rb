@@ -2,7 +2,7 @@ class GamesController < ApplicationController
   def index
     @games = Game.includes(:platform).order("name ASC").page(params[:page])
     @games_sale = Game.includes(:platform).where(:on_sale => true).order("sale_price ASC")
-    @games_new = Game.includes(:platform).where(:created_at => (Date.today - 3.days)..Date.today).order("created_at DESC")
+    @games_new = Game.includes(:platform).where('created_at >= ?', Time.now-3.days).order("created_at DESC")
     add_breadcrumbs("Games")
   end
 
@@ -18,8 +18,10 @@ class GamesController < ApplicationController
     add_breadcrumbs("Sales")
 	end
 
-	def new
-    @games_new = Game.includes(:platform).where(:created_at => (Date.today - 3.days)..Date.today).order("created_at DESC").page(params[:page])
+	def new_arrivals
+    @games_new = Game.includes(:platform).where('created_at >= ?', Time.now-3.days).order("created_at DESC").page(params[:page])
+    add_breadcrumbs("Games", games_path)
+    add_breadcrumbs("New")
   end
 
 end
