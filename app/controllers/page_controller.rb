@@ -7,7 +7,7 @@ class PageController < ApplicationController
   def permalink
     @page = Page.find_by(permalink: params[:permalink])
     add_breadcrumbs("Games", games_path)
-    add_breadcrumbs(@game.name)
+    add_breadcrumbs(@page.title)
   end
 
   def new
