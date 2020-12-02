@@ -4,7 +4,7 @@ OrderedGame.delete_all
 Order.delete_all
 Game.delete_all
 Platform.delete_all
-Page.delete_all
+# Page.delete_all
 # AdminUser.delete_all
 
 filename = Rails.root.join("db/vg.csv")
@@ -30,30 +30,10 @@ games.each do |g|
       sale_price:   g["sale_price"]
     )
   end
-  next
-end
 
+  # genre = Genre.find_or_create_by(name: g["genre"])
 
-games.each do |g|
-  platform = Platform.find_or_create_by(name: g["platform"])
-
-  if platform&.valid?
-    platform.games.create(
-      name:         g["name"],
-      release_date: g["release_date"],
-      description:  g["description"],
-      genre:        g["genre"],
-      price:        g["price"],
-      developer:    g["developer"],
-      cover_art:    g["cover_art"],
-      on_sale:      g["on_sale"],
-      sale_price:   g["sale_price"]
-    )
-  end
-
-  genre = Genre.find_or_create_by(name: g["genre"])
-
-  platform.games.update(genre_id: genre["id"])
+  # platform.games.update(genre_id: genre["id"])
 
 end
 
