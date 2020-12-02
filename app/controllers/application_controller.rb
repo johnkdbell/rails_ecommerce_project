@@ -1,8 +1,6 @@
 class ApplicationController < ActionController::Base
   before_action :set_breadcrumbs
-  before_action :initialize_session
   before_action :current_cart
-  helper_method :cart
   protect_from_forgery with: :exception
 
   def current_cart
@@ -22,15 +20,6 @@ class ApplicationController < ActionController::Base
   end
 
   private
-
-  def initialize_session
-    session[:shopping_cart] ||= {}
-  end
-
-  def cart
-    # Return a collection of Product object based on the product ids in the shopping cart
-    Game.find(session[:shopping_cart])
-  end
 
   def cart_token
     return @cart_token unless @cart_token.nil?

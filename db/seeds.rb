@@ -32,7 +32,29 @@ games.each do |g|
   next
 end
 
-i = 0
+
+games.each do |g|
+  platform = Platform.find_or_create_by(name: g["platform"])
+
+  if platform&.valid?
+    platform.games.create(
+      name:         g["name"],
+      release_date: g["release_date"],
+      description:  g["description"],
+      genre:        g["genre"],
+      price:        g["price"],
+      developer:    g["developer"],
+      cover_art:    g["cover_art"],
+      on_sale:      g["on_sale"],
+      sale_price:   g["sale_price"]
+    )
+  end
+
+  genre = Genre.find_or_create_by(name: g["genre"])
+
+  platform.games.update(genre_id: genre["id"])
+
+end
 
 10.times do
 
@@ -44,7 +66,7 @@ i = 0
     if order&.valid?
       order.ordered_games.create(
         game_id: g.id,
-        purchase_price: g.price,
+        unit_price: g.price,
         quantity: 2
       )
     end

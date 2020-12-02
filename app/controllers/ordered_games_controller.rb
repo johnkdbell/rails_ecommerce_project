@@ -8,12 +8,12 @@ class OrderedGamesController < ApplicationController
       game_id: params[:game_id],
       quantity: params[:quantity]
     )
-
-    redirect_to cart_path
+    redirect_to request.referer
   end
 
   def destroy
     current_cart.remove_item(id: params[:id])
-    redirect_to cart_path
+    flash[:notice] = "#{params[:name]} was just removed from the cart"
+    redirect_to request.referer
   end
 end
