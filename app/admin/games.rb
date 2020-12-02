@@ -3,7 +3,6 @@ ActiveAdmin.register Game do
   permit_params :name, :release_date, :description, :genre, :price, :cover_art, :developer,
                 :platform_id, :sale_price, :on_sale, :image, ordered_games: [:id, :game_id, :order_id, :_destroy]
 
-
   index do
     selectable_column
     column :id

@@ -4,6 +4,7 @@ OrderedGame.delete_all
 Order.delete_all
 Game.delete_all
 Platform.delete_all
+Page.delete_all
 # AdminUser.delete_all
 
 filename = Rails.root.join("db/vg.csv")
@@ -57,7 +58,6 @@ games.each do |g|
 end
 
 10.times do
-
   game = Game.all.sample(2)
 
   order = Order.create(total_price: 0)
@@ -71,15 +71,27 @@ end
       )
     end
   end
-
   #order.update(total_price: game["price"])
-
 end
+
+# Page.create(
+#   title: "About",
+#   content: "Hi! Thanks for visiting our about page!",
+#   permalink: "about_us"
+# )
+
+# Page.create(
+#   title: "Contact Us",
+#   content: "Hi! Thanks for visiting our contact page!",
+#   permalink: "contact_us"
+# )
 
 puts "Created #{Platform.count} developers"
 puts "Created #{Game.count} games"
 puts "Created #{Order.count} orders"
 puts "Created #{OrderedGame.count} ordered games"
+# puts "Created #{Page.count} pages"
+
 
 
 

@@ -22,6 +22,10 @@ Rails.application.routes.draw do
   get "/cart", to: "ordered_games#index"
   resources :ordered_games, path: "/cart/OrderedGame"
 
+  resources :page, except: [:show]
+
+  get ":permalink" => "page#permalink"
+
   root to: "home#index"
 
 end
