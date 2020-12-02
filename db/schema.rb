@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_26_190523) do
+ActiveRecord::Schema.define(version: 2020_12_02_042816) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -76,18 +76,29 @@ ActiveRecord::Schema.define(version: 2020_11_26_190523) do
   end
 
   create_table "ordered_games", force: :cascade do |t|
-    t.decimal "purchase_price"
+    t.decimal "total"
     t.integer "quantity"
     t.integer "game_id", null: false
     t.integer "order_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.decimal "unit_price"
     t.index ["game_id"], name: "index_ordered_games_on_game_id"
     t.index ["order_id"], name: "index_ordered_games_on_order_id"
   end
 
   create_table "orders", force: :cascade do |t|
     t.decimal "total_price"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.decimal "subtotal"
+    t.string "token"
+  end
+
+  create_table "pages", force: :cascade do |t|
+    t.string "title"
+    t.text "content"
+    t.string "permalink"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

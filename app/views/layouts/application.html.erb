@@ -38,11 +38,11 @@
           </li>
         </ul>
 
-        <%= link_to cart_index_path do %>
+        <%= link_to cart_path do %>
         <span>
           <%= content_tag(:i, "shopping_cart", class: "material-icons", style: "color: white; font-size: 36px") %>
           <% if cart.present? %>
-              <sup style="color:white;font-size:12px;padding:0px;background-color:red;border-radius: 15px 15px 15px 15px;padding-left:5px;padding-right:5px;top:-25px;left:-10px"><%= cart.size %></sup>
+              <sup style="color:white;font-size:12px;padding:0px;background-color:red;border-radius: 15px 15px 15px 15px;padding-left:5px;padding-right:5px;top:-25px;left:-10px"><%= ordered_games.size %></sup>
             <% end %>
             </span>
         <% end %>

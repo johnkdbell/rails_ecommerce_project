@@ -16,7 +16,11 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :cart, only: %i[index create destroy]
+  #resources :cart, only: %i[index create destroy]
+
+  get 'ordered_games/index'
+  get "/cart", to: "ordered_games#index"
+  resources :ordered_games, path: "/cart/OrderedGame"
 
   root to: "home#index"
 

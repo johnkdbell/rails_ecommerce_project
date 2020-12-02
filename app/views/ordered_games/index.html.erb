@@ -1,0 +1,20 @@
+<% if flash[:notice] %>
+  <p><%= flash[:notice] %></p>
+<% end %>
+
+<h2>Current Cart</h2>
+
+<% @items.each do |item| %>
+  <%= item.game.name %>
+  <%= number_to_currency item.unit_price %>
+
+  <%= form_for item, method: :delete do |f| %>
+    <%= f.submit "❌",:style=>"background: none;border: none;padding: 0;font: inherit;cursor: pointer;outline: inherit;" %>
+  <% end %>
+  <%= form_tag ordered_games_path do %>
+    <%= hidden_field_tag :game_id, item.game.id %>
+    <%= number_field_tag :quantity, item.quantity %>
+    <%= submit_tag "Add to Cart", :style=>"background: none;border: none;padding: 0;font: inherit;cursor: pointer;outline: inherit;" %>
+  <% end %>
+<% end %>
+

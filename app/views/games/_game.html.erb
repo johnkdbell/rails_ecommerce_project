@@ -34,19 +34,10 @@
             </ul>
           </div>
           <div class="card-footer text-muted hide" style="text-align:right;height:30px;padding-top:6px;">
-            <% if cart.include?(game) %>
-              <%= link_to cart_path(game), method: :delete, :style=>'text-decoration:none;' do %>
-                <p style="font-size:12px;">Remove from Cart ❌</p>
-              <% end %>
-            <% else %>
-              <%= form_with url: cart_index_path, method: :post do %>
-                <%= hidden_field_tag(:id, game.id) %>
-                  <p style="font-size:12px;">
-                    <button style="background: none;border: none;padding: 0;font: inherit;cursor: pointer;outline: inherit;">
-                      Add to Cart ➕
-                    </button>
-                  </p>
-              <% end %>
+            <%= form_tag ordered_games_path do %>
+              <%= hidden_field_tag :game_id, game.id %>
+              <%= number_field_tag :quantity, 1 %>
+              <%= submit_tag "Add to Cart", :style=>"background: none;border: none;padding: 0;font: inherit;cursor: pointer;outline: inherit;" %>
             <% end %>
           </div>
         </div>
@@ -54,4 +45,3 @@
     </div>
   <% end %>
 </div>
-
