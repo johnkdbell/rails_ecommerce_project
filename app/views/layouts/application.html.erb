@@ -18,7 +18,7 @@
   </head>
 
   <body style="display:flex;flex-direction:column;min-height: 100vh;">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-4">
       <%= link_to image_tag("G2.png", width: 70), root_path %>
       <div class=""></div>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -27,24 +27,43 @@
 
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-          <li class="nav-item ">
+          <li class="nav-item px-2">
             <a class="nav-link" href="/games">Games</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/platforms">Platforms</a>
+
+          <li class="nav-item dropdown px-2">
+            <a class="nav-link dropdown-toggle" href="/platforms" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Platforms
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <% @platforms.each do |platform| %>
+                <%= link_to platform.name, platform, :class=>"dropdown-item" %>
+              <% end %>
+            </div>
           </li>
-          <li class="nav-item ">
+
+          <li class="nav-item px-2">
             <a class="nav-link" href="/about_us">About</a>
           </li>
-          <li class="nav-item ">
+          <li class="nav-item px-2">
             <a class="nav-link" href="/contact">Contact Us</a>
           </li>
         </ul>
 
+        <%= form_with(url: search_games_path, method: :get, local: true, class: "form-inline my-2 my-lg-0 px-2") do |f| %>
+          <div>
+            <div>
+              <%= text_field_tag(:keywords, nil, class: "form-control ", placeholder: "Search for Video Games", style: "margin-top: -30px;") %>
+              <%= collection_select :game, :platform_id, Platform.all, :id, :name, prompt: true %>
+              <%= submit_tag("search", class: "material-icons", style: "color: white; font-size: 36px;background: none;border: none;padding: 0;margin-top:4px;cursor: pointer;")  %>
+            </div>
+          </div>
+        <% end %>
+
         <%= link_to cart_path do %>
-        <span>
-          <%= content_tag(:i, "shopping_cart", class: "material-icons", style: "color: white; font-size: 36px") %>
-            </span>
+          <span>
+            <%= content_tag(:i, "shopping_cart", class: "material-icons", style: "color: white; font-size: 36px") %>
+          </span>
         <% end %>
 
       </div>

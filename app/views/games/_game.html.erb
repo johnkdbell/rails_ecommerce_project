@@ -33,12 +33,12 @@
               <li style="font-size:12px;">Genre: <br><%= game.genre %></li>
             </ul>
           </div>
-          <div class="card-footer text-muted hide" style="text-align:right;height:30px;padding-top:6px;">
+          <div class="card-footer text-muted hide" style="text-align:right;height:30px;padding-top:1px;">
             <%= form_tag ordered_games_path do %>
               <%= hidden_field_tag :game_id, game.id %>
               <%= hidden_field_tag :name, game.name %>
-              <%= number_field_tag :quantity, 1 %>
-              <%= submit_tag "Add to Cart", :style=>"background: none;border: none;padding: 0;font: inherit;cursor: pointer;outline: inherit;" %>
+              <%= hidden_field_tag :quantity, 1 %>
+              <%= submit_tag "Add to Cart ➕",  :style=>"background: none;border: none;padding: 0;font: inherit;cursor: pointer;outline: inherit;font-size: 12px;" %>
             <% end %>
           </div>
         </div>
@@ -46,3 +46,4 @@
     </div>
   <% end %>
 </div>
+

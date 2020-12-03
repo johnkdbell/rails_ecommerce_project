@@ -24,4 +24,9 @@ class GamesController < ApplicationController
     add_breadcrumbs("New")
   end
 
+  def search
+    wildcard_search = "%#{params[:keywords]}%"
+    @games = Game.where("name LIKE ?", wildcard_search).order("name ASC")
+  end
+
 end
