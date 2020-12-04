@@ -3,19 +3,56 @@
 <% end %>
 
 <h2>Current Cart</h2>
-<% @items.each do |item| %>
-  <%= item.game.name %>
-  <%= number_to_currency item.unit_price %>
 
-  <%= form_for item, method: :delete do |f| %>
-    <%= hidden_field_tag :name, item.game.name %>
-    <%= f.submit "❌",:style=>"background: none;border: none;padding: 0;font: inherit;cursor: pointer;outline: inherit;" %>
-  <% end %>
-  <%= form_tag ordered_games_path, :class=>"form-inline" do %>
-    <%= hidden_field_tag :game_id, item.game.id %>
-    <%= hidden_field_tag :name, item.game.name %>
-    <%= number_field_tag :quantity, item.quantity, :min=> "1", :max=> "10", :style=>"border: 1;background-color: transparent;width:25px;" %>
-    <%= submit_tag "Update", :style=>"background: none;border: none;padding: 0;font: inherit;cursor: pointer;outline: inherit;", data: { disable_with: 'One moment...' } %>
-  <% end %>
-  </br>
+<div class="row my-3" style="border-bottom: 2px solid black;height:30px;">
+    <div class="col">
+      <b>Game: </b>
+    </div>
+    <div class="col">
+      <b>Price: </b>
+    </div>
+    <div class="col">
+      <div class="row">
+        <div class="col">
+          <b>Quantity:</b>
+        </div>
+        <div class="col">
+          <b>Remove:</b>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<% @items.each do |item| %>
+  <div class="row mx-md-n5">
+    <div class="col">
+      <p ><%= item.game.name %> </p>
+    </div>
+    <div class="col">
+    <% if item.game.on_sale == true %>
+      <p><del><%= number_to_currency item.game.price * item.quantity %></del> <%= number_to_currency item.game.sale_price * item.quantity %></p>
+    <% else %>
+      <p><%= number_to_currency item.game.price * item.quantity %></p>
+    <% end %>
+    </div>
+    <div class="col">
+      <div class="row">
+        <div class="col">
+          <%= form_tag ordered_games_path, :class=>"form-inline" do %>
+            <%= hidden_field_tag :game_id, item.game.id %>
+            <%= hidden_field_tag :name, item.game.name %>
+            <%= number_field_tag :quantity, item.quantity, :min=> "1", :max=> "10", :style=>"color:white;border: none;background-color: grey;width:25px;border-radius:5px;text-align:center;" %>
+            <%= submit_tag "Update", :style=>"background: none;border: none;font: inherit;cursor: pointer;outline: inherit;", data: { disable_with: 'One moment...' } %>
+          <% end %>
+        </div>
+        <div class="col">
+          <%= form_for item, method: :delete do |f| %>
+            <%= hidden_field_tag :name, item.game.name %>
+            <%= f.submit "❌ Remove",:style=>"padding-left:0;background: none;border: none;font: inherit;cursor: pointer;outline: inherit;" %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
 <% end %>
+

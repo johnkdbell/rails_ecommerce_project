@@ -1,6 +1,6 @@
 class PlatformsController < ApplicationController
   def index
-    @platforms = Platform.all.page(params[:page])
+    @platforms = Platform.all
     add_breadcrumbs("Platforms")
 
   end

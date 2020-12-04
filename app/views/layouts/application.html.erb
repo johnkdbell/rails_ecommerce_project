@@ -36,7 +36,7 @@
               Platforms
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <% @platforms.each do |platform| %>
+              <% @platformso.each do |platform| %>
                 <%= link_to platform.title, platform, :class=>"dropdown-item" %>
               <% end %>
             </div>
@@ -51,15 +51,17 @@
         </ul>
 
         <% names = [] %>
-          <% @platforms.each do |platform| %>
+          <% @platformso.each do |platform| %>
           <% names.push platform.title %>
         <% end %>
 
-        <%= form_with(url: search_games_path, method: :get, local: true, class: "form-inline my-2 my-lg-0") do |f| %>
-          <%= f.select :platform, options_for_select(names, params[:platform]), { include_blank: 'Click to Select Platform'}, :class=>"searchdropdown" %>
-          <%= text_field_tag(:keywords, nil, class: "input", placeholder: "Video Games Search...") %>
-          <%= submit_tag("search", class: "material-icons", style: "color: black;background: none;border: none;padding: 0;cursor: pointer;margin-left:10px;background:white;border-radius:100%;height:35px;width:35px;")  %>
-        <% end %>
+        <span class="px-4" style="margin-top:-5px;">
+          <%= form_with(url: search_games_path, method: :get, local: true, class: "form-inline my-2 my-lg-0") do |f| %>
+            <%= f.select :platform, options_for_select(names, params[:platform]), { include_blank: 'Click to Select Platform'}, :class=>"searchdropdown" %>
+            <%= text_field_tag(:keywords, nil, class: "input", placeholder: "Video Games Search...") %>
+            <%= submit_tag("search", class: "material-icons", style: "color: black;background: none;border: none;padding: 0;cursor: pointer;margin-left:10px;background:white;border-radius:100%;height:35px;width:35px;")  %>
+          <% end %>
+        </span>
 
         <% @total_quantity = 0 %>
         <% @current_cart.order.ordered_games.each do |item| %>
@@ -68,14 +70,16 @@
 
 
         <%= link_to cart_path do %>
-          <span>
-            <span>
-              <sup style="color:white;font-size:12px;padding:0px;background-color:red;border-radius: 15px 15px 15px 15px;padding-left:5px;padding-right:5px;top:-25px;right:-50px;"><%= @total_quantity %></sup>
-            </span>
-            <%= content_tag(:i, "shopping_cart", class: "material-icons", style: "color: white; font-size: 32px") %>
+          <span style="">
+            <% if @total_quantity != 0 %>
+              <sup style="display:block;color:pink;font-size:12px;width:20px;left:30px;top:20px;"><%= @total_quantity %></sup>
+              <%= content_tag(:i, "shopping_cart", class: "material-icons", style: "color: pink; font-size: 32px") %>
+            <% else %>
+              <sup style="visibility:hidden;display:block;color:pink;font-size:12px;width:20px;"><%= @total_quantity %></sup>
+              <%= content_tag(:i, "shopping_cart", class: "material-icons", style: "color: white; font-size: 32px") %>
+            <% end %>
           </span>
         <% end %>
-
       </div>
     </nav>
 

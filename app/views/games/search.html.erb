@@ -2,14 +2,10 @@
 
 <p class="">Search results found <%= pluralize(@games.count, 'video game') %> when searching for: <%= params[:keywords] %> <%= "(" + params[:platform] + ")"%></p>
 
-<div class="">
-    <div class="">
-    <div class="content">
-        <ul>
-          <% @games.each do |game| %>
-              <li><%= link_to game.name, game %></li>
-            <% end %>
-        </ul>
-    </div>
-</div>
-
+<span>
+  <ul>
+    <% @games.each do |game| %>
+      <li><%= link_to game.name, game %></li>
+    <% end %>
+  </ul>
+</span>

@@ -1,5 +1,5 @@
 class Platform < ApplicationRecord
   has_many :games
 
-  validates :name, presence: true
+  validates :title, presence: true
 end

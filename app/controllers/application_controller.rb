@@ -23,7 +23,7 @@ class ApplicationController < ActionController::Base
   private
 
   def set_platforms
-    @platforms = Platform.all
+    @platformso = Platform.all
   end
 
   def cart_token

@@ -26,7 +26,11 @@
             </br>
 
             <ul class="list-unstyled d-flex justify-content-between font-small text-muted mb-4">
-              <li style="font-size:12px;">Price: <br><%= number_to_currency(game.price) %></li>
+              <% if game.on_sale == true %>
+                <li style="font-size:12px;">Price: <br><del><%= number_to_currency(game.price) %></del> <%= number_to_currency(game.sale_price) %></li>
+              <% else %>
+                <li style="font-size:12px;">Price: <br><%= number_to_currency(game.price) %></li>
+              <% end %>
               <li style="font-size:12px;">Release Date: <br><%= game.release_date %></li>
             </ul>
             <ul class="list-unstyled d-flex justify-content-between font-small text-muted mb-4">
