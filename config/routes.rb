@@ -20,7 +20,7 @@ Rails.application.routes.draw do
 
   get 'ordered_games/index'
   get "/cart", to: "ordered_games#index"
-  resources :ordered_games, path: "/cart/OrderedGame"
+  resources :ordered_games, path: "/cart" #used to be | path: "/cart/OrderedGame" | if something goes wrong
 
   resources :page, except: [:show]
 
