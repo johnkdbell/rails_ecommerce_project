@@ -23,7 +23,7 @@ class ApplicationController < ActionController::Base
   private
 
   def set_platforms
-    @platformso = Platform.all
+    @platformso = Platform.all.order(:title => :asc)
   end
 
   def cart_token

@@ -22,7 +22,7 @@ Rails.application.routes.draw do
   get "/cart", to: "ordered_games#index"
   resources :ordered_games, path: "/cart" #used to be | path: "/cart/OrderedGame" | if something goes wrong
 
-  resources :page, except: [:show]
+  resources :page, except: [:show], path: "/pages"
 
   get ":permalink" => "page#permalink"
 
