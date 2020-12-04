@@ -1,9 +1,15 @@
 <% content_for(:html_title) { "Search: " + params[:keywords] } %>
 
-<p class="mb-5">Search results found <%= pluralize(@games.count, 'video game') %> when searching for: <%= params[:keywords] %></p>
+<p class="">Search results found <%= pluralize(@games.count, 'video game') %> when searching for: <%= params[:keywords] %> <%= "(" + params[:platform] + ")"%></p>
 
-<ul>
-  <% @games.each do |game| %>
-    <li><%= link_to game.name, game %></li>
-  <% end %>
-</ul>
+<div class="">
+    <div class="">
+    <div class="content">
+        <ul>
+          <% @games.each do |game| %>
+              <li><%= link_to game.name, game %></li>
+            <% end %>
+        </ul>
+    </div>
+</div>
+

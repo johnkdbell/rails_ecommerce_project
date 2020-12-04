@@ -7,7 +7,7 @@ class PlatformsController < ApplicationController
 
   def show
     @platform = Platform.find(params[:id])
-    add_breadcrumbs("Platforms", games_path)
-    add_breadcrumbs(@platform.name)
+    add_breadcrumbs("Platforms", platforms_path)
+    add_breadcrumbs(@platform.title)
   end
 end

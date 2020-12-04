@@ -1,6 +1,6 @@
 </br>
 
-<% content_for(:html_title) { @platform.name } %>
+<% content_for(:html_title) { @platform.title } %>
 
 <div class="text-decoration-none">
   <a href='#' style="text-decoration:none;" onclick='history.go(-1);return false;'>Return</a>
@@ -9,7 +9,7 @@
 </br>
 
 <div class="container">
-  <h1><%= @platform.name %></h1>
+  <h1><%= @platform.title %></h1>
 
   <p>This platform has <%= pluralize @platform.games.count, "game" %> available.</p>
   <div class="container">
