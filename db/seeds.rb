@@ -1,9 +1,11 @@
 require "csv"
 
+GameGenre.delete_all
+Genre.delete_all
 OrderedGame.delete_all
 Order.delete_all
-Platform.delete_all
 Game.delete_all
+Platform.delete_all
 Page.delete_all
 # AdminUser.delete_all
 
@@ -16,13 +18,14 @@ games = CSV.parse(csv_data, headers: true, encoding: "utf-8")
 
 games.each do |g|
   platform = Platform.find_or_create_by(title: g["platform"])
+  genre = Genre.find_or_create_by(genre_name: g["genre"] )
 
   if platform&.valid?
-    platform.games.create(
+  game = platform.games.create(
       name:         g["name"],
       release_date: g["release_date"],
       description:  g["description"],
-      genre:        g["genre"],
+
       price:        g["price"],
       developer:    g["developer"],
       cover_art:    g["cover_art"],
@@ -34,6 +37,8 @@ games.each do |g|
   # genre = Genre.find_or_create_by(name: g["genre"])
 
   # platform.games.update(genre_id: genre["id"])
+
+  GameGenre.create(game: game, genre: genre)
 
 end
 
@@ -71,7 +76,12 @@ puts "Created #{Game.count} games"
 puts "Created #{Order.count} orders"
 puts "Created #{OrderedGame.count} ordered games"
 puts "Created #{Page.count} pages"
+puts "Created #{Genre.count} genres"
+puts "Created #{GameGenre.count} game genres"
 
 
 
+if Rails.env.development?
+  AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password')
+end
 

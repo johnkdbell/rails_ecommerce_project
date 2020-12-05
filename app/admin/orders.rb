@@ -1,6 +1,6 @@
 ActiveAdmin.register Order do
 
-  permit_params :total_price, ordered_games: [:id, :game_id, :order_id, :_destroy]
+  permit_params :total_price, ordered_games_attributes: [:id, :game_id, :order_id, :_destroy]
 
   index do
     selectable_column
