@@ -2,57 +2,81 @@
   <p><%= flash[:notice] %></p>
 <% end %>
 
-<h2>Current Cart</h2>
-
-<div class="row my-3" style="border-bottom: 2px solid black;height:30px;">
-    <div class="col">
-      <b>Game: </b>
-    </div>
-    <div class="col">
-      <b>Price: </b>
-    </div>
-    <div class="col">
-      <div class="row">
-        <div class="col">
-          <b>Quantity:</b>
-        </div>
-        <div class="col">
-          <b>Remove:</b>
-        </div>
-      </div>
-    </div>
-  </div>
-
+<% @total_quantity = 0 %>
 <% @items.each do |item| %>
-  <div class="row mx-md-n5">
-    <div class="col">
-      <p ><%= item.game.name %> </p>
-    </div>
-    <div class="col">
-    <% if item.game.on_sale == true %>
-      <p><del><%= number_to_currency item.game.price * item.quantity %></del> <%= number_to_currency item.game.sale_price * item.quantity %></p>
-    <% else %>
-      <p><%= number_to_currency item.game.price * item.quantity %></p>
-    <% end %>
-    </div>
-    <div class="col">
-      <div class="row">
-        <div class="col">
-          <%= form_tag ordered_games_path, :class=>"form-inline" do %>
-            <%= hidden_field_tag :game_id, item.game.id %>
-            <%= hidden_field_tag :name, item.game.name %>
-            <%= number_field_tag :quantity, item.quantity, :min=> "1", :max=> "10", :style=>"color:white;border: none;background-color: grey;width:25px;border-radius:5px;text-align:center;" %>
-            <%= submit_tag "Update", :style=>"background: none;border: none;font: inherit;cursor: pointer;outline: inherit;", data: { disable_with: 'One moment...' } %>
-          <% end %>
-        </div>
-        <div class="col">
-          <%= form_for item, method: :delete do |f| %>
-            <%= hidden_field_tag :name, item.game.name %>
-            <%= f.submit "❌ Remove",:style=>"padding-left:0;background: none;border: none;font: inherit;cursor: pointer;outline: inherit;" %>
-          <% end %>
+  <% @total_quantity += item.quantity %>
+<% end %>
+<h5 class="mb-4">Cart (<span><%= @total_quantity %></span> items)</h5>
+
+<div class="container">
+<% @items.each do |item| %>
+  <div class="row justify-content-center"" >
+    <div class="col-lg-8" style="width:auto;box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 3px 10px 0 rgba(0, 0, 0, 0.1);">
+      <div class="mb-3">
+        <div class="pt-4">
+          <div class="row mb-4">
+            <div class="col-md-5 col-lg-3 col-xl-3">
+              <div class="center"" style="max-width: 300px; max-height: 500px;">
+                <% if item.game.image.present? %>
+                  <%= image_tag(item.game.image.variant(resize_to_limit: [600, 600]), {:style => "display: block;width: 100%;height: auto;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);"}) %>
+                <% else %>
+                  <%= image_tag(item.game.cover_art, {:style => "display: block;width: 100%;height: auto;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);"}) %>
+                <% end %>
+              </div>
+            </br>
+            </div>
+            <div class="col-md-7 col-lg-9 col-xl-9">
+              <div>
+                <div class="d-flex justify-content-between">
+                  <div>
+                    <p><%= link_to item.game.name, item.game %> </p>
+                    <p class="mb-2 text-muted text-uppercase small"><strong>Genre: </strong><%= item.game.genres_list %></p>
+                    <p class="mb-2 text-muted text-uppercase small"><strong>Platform: </strong><%= link_to item.game.platform.title, item.game.platform %></p>
+                    <p class="mb-2 text-muted text-uppercase small"><strong>Release Date: </strong><%= item.game.release_date %></p>
+                    <p class="mb-3 text-muted text-uppercase small"><strong>Developer: </strong><%= item.game.developer %></p>
+                  </div>
+                  <div>
+                    <div class="def-number-input number-input safari_only mb-0 w-100">
+                      <%= form_tag ordered_games_path, :class=>"form-inline" do %>
+                        <%= hidden_field_tag :game_id, item.game.id %>
+                        <%= hidden_field_tag :name, item.game.name %>
+                        <%= number_field_tag :quantity, item.quantity, :min=> "1", :max=> "10", :style=>"color:white;border: none;background-color: grey;width:40px;border-radius:50px;text-align:center;" %>
+                        <%= submit_tag "Update", :style=>"background: none;border: none;font: inherit;cursor: pointer;outline: inherit;", data: { disable_with: 'One moment' } %>
+                      <% end %>
+                    </div>
+                  </div>
+                </div>
+                <div class="d-flex justify-content-between align-items-center">
+                  <div>
+                    <%= form_for item, method: :delete do |f| %>
+                      <%= hidden_field_tag :name, item.game.name %>
+                      <%= f.submit "❌ Remove",:style=>"padding-left:0;background: none;border: none;font: inherit;cursor: pointer;outline: inherit;", data: { disable_with: 'One moment...' } %>
+                    <% end %>
+                  </div>
+                  <p class="mb-0">
+                    <span>
+                      <strong id="summary">
+                        <% if item.game.on_sale == true %>
+                          <del style="color:#B2B2B2;font-weight: normal;font-style: oblique;"><%= number_to_currency item.game.price * item.quantity %></del>
+                          <%= number_to_currency item.game.sale_price * item.quantity %>
+                        <% else %>
+                         <%= number_to_currency item.game.price * item.quantity %>
+                        <% end %>
+                      </strong>
+                    </span>
+                  </p class="mb-0">
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-  </div>
-<% end %>
 
+    </div>
+
+  </div>
+
+
+</br>
+<% end %>
+</div>

@@ -35,7 +35,6 @@ class GamesController < ApplicationController
 
     @platform ? @count = Game.joins(:platform).where('platform_id = ?', @platform.id).where("name LIKE ?", wildcard_search.downcase()) : @count = Game.joins(:platform).where("name LIKE ?", wildcard_search.downcase())
     @platform ? @games = Game.joins(:platform).where('platform_id = ?', @platform.id).where("name LIKE ?", wildcard_search.downcase()).page(params[:page]) : @games = Game.joins(:platform).where("name LIKE ?", wildcard_search.downcase())
-
   end
 
 end

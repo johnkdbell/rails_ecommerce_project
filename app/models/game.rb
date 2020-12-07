@@ -9,11 +9,14 @@ class Game < ApplicationRecord
   accepts_nested_attributes_for :ordered_games, allow_destroy: true
   accepts_nested_attributes_for :game_genres, allow_destroy: true
 
-
-
   paginates_per 8
 
   validates :name, presence: true, uniqueness: true
   validates :release_date, :developer, presence: true
   validates :price, presence: true, numericality: true
+
+  def genres_list
+    genres.map(&:name).join(", ")
+    genres.map { |genre| genre.name }.join(", ")
+  end
 end
