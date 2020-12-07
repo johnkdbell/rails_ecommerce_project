@@ -3,7 +3,6 @@ class Genre < ApplicationRecord
   has_many :games, through: :game_genres
 
   def name
-    return self.genre_name
+    genre_name
   end
-
 end

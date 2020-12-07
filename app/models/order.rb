@@ -5,6 +5,6 @@ class Order < ApplicationRecord
   validates :total_price, presence: true, numericality: true
 
   def name
-    return self.id
+    id
   end
 end

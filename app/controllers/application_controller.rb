@@ -23,7 +23,7 @@ class ApplicationController < ActionController::Base
   private
 
   def set_platforms
-    @platformso = Platform.all.order(:title => :asc)
+    @platformso = Platform.all.order(title: :asc)
   end
 
   def cart_token
@@ -32,5 +32,4 @@ class ApplicationController < ActionController::Base
     session[:cart_token] ||= SecureRandom.hex(8)
     @cart_token = session[:cart_token]
   end
-
 end

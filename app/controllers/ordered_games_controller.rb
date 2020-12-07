@@ -5,7 +5,7 @@ class OrderedGamesController < ApplicationController
 
   def create
     current_cart.add_item(
-      game_id: params[:game_id],
+      game_id:  params[:game_id],
       quantity: params[:quantity]
     )
     redirect_to request.referer

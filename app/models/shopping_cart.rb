@@ -1,5 +1,4 @@
 class ShoppingCart
-
   def initialize(token:)
     @token = token
   end
@@ -30,5 +29,4 @@ class ShoppingCart
   def remove_item(id:)
     order.ordered_games.destroy(id)
   end
-
 end

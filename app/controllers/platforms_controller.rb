@@ -2,7 +2,6 @@ class PlatformsController < ApplicationController
   def index
     @platforms = Platform.all
     add_breadcrumbs("Platforms")
-
   end
 
   def show

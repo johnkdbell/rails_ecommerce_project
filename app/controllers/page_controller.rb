@@ -1,5 +1,4 @@
 class PageController < ApplicationController
-
   def index
     @pages = Page.all
   end

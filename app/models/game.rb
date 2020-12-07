@@ -17,6 +17,6 @@ class Game < ApplicationRecord
 
   def genres_list
     genres.map(&:name).join(", ")
-    genres.map { |genre| genre.name }.join(", ")
+    genres.map(&:name).join(", ")
   end
 end
