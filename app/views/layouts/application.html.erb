@@ -48,6 +48,15 @@
           <li class="nav-item px-2">
             <a class="nav-link" href="/contact">Contact Us</a>
           </li>
+          <% if user_signed_in? %>
+            <li class="nav-item px-2">
+              <%= link_to 'Sign Out', destroy_user_session_path, method: :delete, class: "nav-link" %>
+            </li>
+          <% else %>
+            <li class="nav-item px-2">
+              <%= link_to 'Sign In', new_user_session_path, class: "nav-link" %>
+            </li>
+          <% end %>
         </ul>
 
         <% names = [] %>
@@ -59,7 +68,7 @@
           <%= form_with(url: search_games_path, method: :get, local: true, class: "form-inline my-2 my-lg-0") do |f| %>
             <%= f.select :platform, options_for_select(names, params[:platform]), { include_blank: 'Click to Select Platform'}, :class=>"searchdropdown" %>
             <%= text_field_tag(:keywords, nil, class: "input", placeholder: "Video Games Search...") %>
-            <%= submit_tag("search", class: "material-icons", style: "color: black;background: none;border: none;padding: 0;cursor: pointer;margin-left:10px;background:white;border-radius:100%;height:35px;width:35px;")  %>
+            <%= submit_tag("search", class: "material-icons", style: "color: white;background: none;border: none;padding: 0;cursor: pointer;margin-left:10px;")  %>
           <% end %>
         </span>
 
@@ -86,6 +95,15 @@
       <div class="container">
         </br>
         <%= render 'shared/breadcrumbs' %>
+
+        <% if flash[:notice] %>
+          <p><%= flash[:notice] %></p>
+        <% end %>
+
+        <% if flash[:alert] %>
+          <p><%= flash[:alert] %></p>
+        <% end %>
+
         <%= yield %>
       </div>
     </section>
