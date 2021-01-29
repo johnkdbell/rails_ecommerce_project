@@ -2,8 +2,7 @@ class GamesController < ApplicationController
   def index
     @games = Game.includes(:platform).order("name ASC").page(params[:page])
     @games_sale = Game.includes(:platform).where(on_sale: true).order("sale_price ASC")
-    @games_new = Game.includes(:platform)
-                     .where("created_at >= ?", Time.zone.now - 3.days).order("created_at DESC")
+    @games_new = Game.includes(:platform).where("created_at >= ?", Time.zone.now - 3.days).order("created_at DESC")
     add_breadcrumbs("Games")
   end
 
@@ -30,6 +29,8 @@ class GamesController < ApplicationController
 
   def search
     @game_platforms = Platform.all
+    add_breadcrumbs("Games", games_path)
+    add_breadcrumbs("Search")
     wildcard_search = "%#{params[:keywords]}%"
     platform_search = params[:platform].to_s
 
